@@ -1431,6 +1431,9 @@ void SourceWidget::keyPressEvent(QKeyEvent *event)
 {
     bool isHome = event->key() == Qt::Key_Home;
     bool isEnd = event->key() == Qt::Key_End;
+    bool isPlus = event->key() == Qt::Key_Plus;
+    bool isMinus = event->key() == Qt::Key_Minus;
+    bool fontSizeChange = isPlus || isMinus;
 
 #if defined(__APPLE__)
     if (event->modifiers() & Qt::ControlModifier) {
@@ -1445,6 +1448,18 @@ void SourceWidget::keyPressEvent(QKeyEvent *event)
         verticalScrollBar()->setValue(verticalScrollBar()->maximum());
     else
         QAbstractScrollArea::keyPressEvent(event);
+    
+    QFont newFont = font();
+    if(isPlus)
+        newFont.setPointSize(newFont.pointSize() + 2);
+    else if(isMinus && newFont.pointSize() > 2)
+        newFont.setPointSize(newFont.pointSize() - 2);
+
+    if(fontSizeChange) {
+        setFont(newFont);
+        m_view->setFont(newFont);
+        m_lineArea->setFont(newFont);
+    }
 }
 
 // Line and column indices are 1-based.
