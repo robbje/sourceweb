@@ -398,21 +398,21 @@ SourceWidgetTextPalette::SourceWidgetTextPalette(Project &project) :
     m_pens[static_cast<size_t>(Color::transparent)].setColor(Qt::transparent);
 
     m_syntaxColor.resize(CXXSyntaxHighlighter::KindMax, Color::defaultText);
-    setSyntaxColor(CXXSyntaxHighlighter::KindComment, Qt::darkGreen);
-    setSyntaxColor(CXXSyntaxHighlighter::KindQuoted, Qt::darkGreen);
-    setSyntaxColor(CXXSyntaxHighlighter::KindNumber, Qt::darkBlue);
-    setSyntaxColor(CXXSyntaxHighlighter::KindDirective, Qt::darkBlue);
-    setSyntaxColor(CXXSyntaxHighlighter::KindKeyword, Qt::darkYellow);
+    setSyntaxColor(CXXSyntaxHighlighter::KindComment, QColor("#808080"));
+    setSyntaxColor(CXXSyntaxHighlighter::KindQuoted, QColor("#E6DB74"));
+    setSyntaxColor(CXXSyntaxHighlighter::KindNumber, QColor("#AE81FF"));
+    setSyntaxColor(CXXSyntaxHighlighter::KindDirective, QColor("#F92672"));
+    setSyntaxColor(CXXSyntaxHighlighter::KindKeyword, QColor("#F92672"));
 
-    setSymbolTypeColor("GlobalVariable", Qt::darkCyan);
-    setSymbolTypeColor("Field", Qt::darkRed);
-    setSymbolTypeColor("Namespace", Qt::darkMagenta);
-    setSymbolTypeColor("Struct", Qt::darkMagenta);
-    setSymbolTypeColor("Class", Qt::darkMagenta);
-    setSymbolTypeColor("Union", Qt::darkMagenta);
-    setSymbolTypeColor("Enum", Qt::darkMagenta);
-    setSymbolTypeColor("Typedef", Qt::darkMagenta);
-    setSymbolTypeColor("Macro", Qt::darkBlue);
+    setSymbolTypeColor("GlobalVariable", QColor("#F8F8F0"));
+    setSymbolTypeColor("Field", QColor("#F8F8F0"));
+    setSymbolTypeColor("Namespace", QColor("#F8F8F0"));
+    setSymbolTypeColor("Struct", QColor("#F8F8F0"));
+    setSymbolTypeColor("Class", QColor("#F8F8F0"));
+    setSymbolTypeColor("Union", QColor("#F8F8F0"));
+    setSymbolTypeColor("Enum", QColor("#F8F8F0"));
+    setSymbolTypeColor("Typedef", QColor("#66D9EF"));
+    setSymbolTypeColor("Macro", QColor("#F8F8F0"));
 }
 
 void SourceWidgetTextPalette::setDefaultTextColor(const QColor &color)
@@ -503,6 +503,11 @@ SourceWidgetView::SourceWidgetView(
     setMouseTracking(true);
     setAttribute(Qt::WA_Hover);
     updateFindMatches();
+
+    QPalette p = this->palette();
+    p.setColor(this->backgroundRole(), QColor("#282828"));
+    p.setColor(this->foregroundRole(), QColor("#F8F8F0"));
+    this->setPalette(p);
 }
 
 // Declare out-of-line destructor where member std::unique_ptr's types are
