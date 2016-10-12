@@ -423,6 +423,9 @@ FolderWidget::FolderWidget(FileManager &fileManager, QWidget *parent) :
             SIGNAL(selectionChanged()));
     setBackgroundRole(QPalette::Base);
     setFocusPolicy(Qt::NoFocus);
+    QPalette p = this->palette();
+    p.setColor(this->backgroundRole(), QColor("#787878"));
+    this->setPalette(p);
 }
 
 void FolderWidget::selectFile(File *file)
